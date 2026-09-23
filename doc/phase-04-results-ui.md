@@ -1,6 +1,6 @@
 # Phase 4 — Results UI (Card-Based Display)
 
-**Status:** Not started  
+**Status:** Complete  
 **Estimated time:** 20 minutes  
 **Dependencies:** [Phase 3](./phase-03-input-ui.md)  
 **Priority:** Must have

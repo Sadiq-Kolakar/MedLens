@@ -1,3 +1,6 @@
+from contextlib import contextmanager
+from typing import Iterator
+
 import streamlit as st
 
 
@@ -37,3 +40,11 @@ def render_section_divider(title: str | None = None) -> None:
     st.divider()
     if title:
         st.markdown(f"### {title}")
+
+
+@contextmanager
+def render_card(title: str, icon: str | None = None) -> Iterator[None]:
+    label = f"{icon} {title}" if icon else title
+    with st.container(border=True):
+        st.markdown(f"#### {label}")
+        yield

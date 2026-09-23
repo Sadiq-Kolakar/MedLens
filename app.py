@@ -4,6 +4,7 @@ from config import get_openai_api_key
 from llm import generate_summary
 from ui.components import inject_custom_css, render_header, render_section_divider
 from ui.input_form import render_input_form
+from ui.results import render_results
 
 st.set_page_config(page_title="MedLens", page_icon="🔬", layout="wide")
 inject_custom_css()
@@ -25,7 +26,11 @@ if form_data.generate_clicked:
                     form_data.topic,
                 )
                 render_section_divider("Results")
-                st.json(result.model_dump())
+                render_results(
+                    result,
+                    form_data.summary_length,
+                    form_data.topic,
+                )
             except Exception as e:
                 message = getattr(e, "user_message", None) or (
                     "Unable to generate the summary. Please try again."

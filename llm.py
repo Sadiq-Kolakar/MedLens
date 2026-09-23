@@ -1,48 +1,56 @@
+import json
+import re
+
 from openai import OpenAI
 
 from config import DEFAULT_MODEL, get_openai_api_key
-
-LENGTH_INSTRUCTIONS = {
-    "Small": (
-        "Provide a highly concise summary focusing only on the most important points."
-    ),
-    "Medium": (
-        "Provide a balanced summary containing the main research information and findings."
-    ),
-    "Detailed": (
-        "Provide a comprehensive summary including methodological and research details "
-        "while remaining concise compared to the original abstract."
-    ),
-}
-
-SYSTEM_PROMPT = """You are a medical literature summarization assistant.
-
-Summarize only the information present in the provided abstract.
-Do not hallucinate facts or add information not contained in the abstract.
-Avoid medical diagnoses and treatment recommendations."""
+from models import SummaryGenerationError, SummaryResult
+from prompts import build_system_prompt, build_user_prompt
 
 
-def generate_summary(abstract: str, length: str) -> str:
+def _extract_json(content: str) -> dict:
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        match = re.search(r"\{.*\}", content, re.DOTALL)
+        if not match:
+            raise SummaryGenerationError(
+                "Unable to generate the summary. Please try again."
+            )
+        try:
+            return json.loads(match.group())
+        except json.JSONDecodeError:
+            raise SummaryGenerationError(
+                "Unable to generate the summary. Please try again."
+            )
+
+
+def generate_summary(
+    abstract: str,
+    length: str,
+    topic: str | None = None,
+) -> SummaryResult:
     api_key = get_openai_api_key()
     if not api_key:
-        raise ValueError("OpenAI API key is not configured.")
+        raise SummaryGenerationError("OpenAI API key is not configured.")
 
     client = OpenAI(api_key=api_key)
-    length_instruction = LENGTH_INSTRUCTIONS.get(length, LENGTH_INSTRUCTIONS["Medium"])
 
     response = client.chat.completions.create(
         model=DEFAULT_MODEL,
+        response_format={"type": "json_object"},
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": build_system_prompt()},
             {
                 "role": "user",
-                "content": (
-                    f"Summary length: {length}\n"
-                    f"{length_instruction}\n\n"
-                    f"Abstract:\n{abstract}"
-                ),
+                "content": build_user_prompt(abstract, length, topic),
             },
         ],
     )
 
-    return response.choices[0].message.content or ""
+    content = response.choices[0].message.content
+    if not content:
+        raise SummaryGenerationError("Unable to generate the summary. Please try again.")
+
+    data = _extract_json(content)
+    return SummaryResult.model_validate(data)

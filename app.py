@@ -28,6 +28,9 @@ if st.button("Generate Summary"):
             try:
                 result = generate_summary(abstract.strip(), summary_length)
                 st.markdown("### Summary")
-                st.markdown(result)
-            except Exception:
-                st.error("Unable to generate the summary. Please try again.")
+                st.json(result.model_dump())
+            except Exception as e:
+                message = getattr(e, "user_message", None) or (
+                    "Unable to generate the summary. Please try again."
+                )
+                st.error(message)

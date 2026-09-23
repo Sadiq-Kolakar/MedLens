@@ -22,7 +22,7 @@ Use these docs when building: point the agent at a specific phase file (e.g. *"B
 | 3 | [phase-03-input-ui.md](./phase-03-input-ui.md) | Complete | Input form, length selector, generate button |
 | 4 | [phase-04-results-ui.md](./phase-04-results-ui.md) | Complete | Card-based structured output display |
 | 5 | [phase-05-topic-relevance.md](./phase-05-topic-relevance.md) | Complete | Optional topic/keyword relevance check |
-| 6 | [phase-06-error-handling.md](./phase-06-error-handling.md) | Not started | Validation, API errors, malformed responses |
+| 6 | [phase-06-error-handling.md](./phase-06-error-handling.md) | Complete | Validation, API errors, malformed responses |
 | 7 | [phase-07-session-history.md](./phase-07-session-history.md) | Not started | Optional Streamlit session state history |
 | 8 | [phase-08-demo-polish.md](./phase-08-demo-polish.md) | Not started | Final polish, demo readiness, smoke tests |
 | — | [phase-09-future-enhancements.md](./phase-09-future-enhancements.md) | Reference | Post-MVP features (do not build for hackathon) |

@@ -1,8 +1,14 @@
 import streamlit as st
 
-from config import get_openai_api_key
+from config import MISSING_API_KEY_MESSAGE, get_openai_api_key, validate_abstract
 from llm import generate_summary
-from ui.components import inject_custom_css, render_header, render_section_divider
+from models import SummaryGenerationError
+from ui.components import (
+    inject_custom_css,
+    render_header,
+    render_section_divider,
+    show_error,
+)
 from ui.input_form import render_input_form
 from ui.results import render_results
 
@@ -13,10 +19,11 @@ render_header()
 form_data = render_input_form()
 
 if form_data.generate_clicked:
-    if not form_data.abstract.strip():
-        st.error("Please enter a medical abstract.")
+    validation_error = validate_abstract(form_data.abstract)
+    if validation_error:
+        show_error(validation_error)
     elif not get_openai_api_key():
-        st.error("OpenAI API key is not configured.")
+        show_error(MISSING_API_KEY_MESSAGE)
     else:
         with st.spinner("Generating summary..."):
             try:
@@ -31,8 +38,5 @@ if form_data.generate_clicked:
                     form_data.summary_length,
                     form_data.topic,
                 )
-            except Exception as e:
-                message = getattr(e, "user_message", None) or (
-                    "Unable to generate the summary. Please try again."
-                )
-                st.error(message)
+            except SummaryGenerationError as e:
+                show_error(e.user_message)

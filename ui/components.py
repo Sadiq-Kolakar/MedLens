@@ -42,6 +42,10 @@ def render_section_divider(title: str | None = None) -> None:
         st.markdown(f"### {title}")
 
 
+def show_error(message: str) -> None:
+    st.error(message)
+
+
 @contextmanager
 def render_card(title: str, icon: str | None = None) -> Iterator[None]:
     label = f"{icon} {title}" if icon else title

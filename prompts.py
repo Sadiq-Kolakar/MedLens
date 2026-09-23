@@ -59,10 +59,13 @@ def build_user_prompt(
         topic_section = f"""
 Topic / keyword for relevance check: {topic.strip()}
 
-Analyze whether the abstract is relevant to this topic based only on the abstract content.
-Set topic_relevance.status to exactly "Relevant" or "Not Relevant".
-Set topic_relevance.justification to one concise sentence explaining why.
-Do not invent information beyond the abstract.
+Perform a topic relevance check using ONLY the provided abstract.
+- Set topic_relevance.status to exactly "Relevant" or "Not Relevant".
+- Set topic_relevance.justification to exactly one concise sentence.
+- If relevant, begin the justification with "Relevant because" (example: "Relevant because the study directly evaluates the effectiveness of the treatment in patients with Type 2 diabetes.").
+- If not relevant, begin the justification with "Not relevant because" (example: "Not relevant because the study focuses on cardiovascular disease and does not directly investigate diabetes.").
+- Base the decision only on whether the abstract directly addresses the topic.
+- Do not invent information beyond the abstract.
 """
     else:
         topic_section = """

@@ -1,6 +1,6 @@
 # Phase 5 — Topic / Keyword Relevance Check
 
-**Status:** Not started  
+**Status:** Complete  
 **Estimated time:** 10 minutes  
 **Dependencies:** [Phase 4](./phase-04-results-ui.md)  
 **Priority:** Must have

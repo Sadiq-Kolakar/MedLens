@@ -20,6 +20,32 @@ def _display_bullets(items: list[str]) -> None:
     st.markdown("\n".join(f"- {item}" for item in cleaned))
 
 
+def _format_relevance_status(status: str) -> str:
+    normalized = status.strip().lower()
+    if not normalized:
+        return ""
+    if normalized.startswith("not relevant"):
+        return "❌ Not Relevant"
+    if normalized.startswith("relevant"):
+        return "✅ Relevant"
+    return status.strip()
+
+
+def _render_topic_relevance(result: SummaryResult) -> None:
+    relevance = result.topic_relevance
+    status_display = _format_relevance_status(relevance.status)
+    justification = relevance.justification.strip() if relevance.justification else ""
+
+    with render_card("Topic Relevance", "🔍"):
+        if status_display:
+            st.markdown(f"**Status:** {status_display}")
+        if justification:
+            st.markdown("**Justification:**")
+            st.markdown(f'"{justification}"')
+        if not status_display and not justification:
+            st.markdown(f"*{NOT_SPECIFIED}*")
+
+
 def render_results(
     result: SummaryResult,
     length: str,
@@ -58,12 +84,5 @@ def render_results(
     with render_card("Limitations", "⚠️"):
         _display_bullets(result.limitations)
 
-    if topic:
-        with render_card("Topic Relevance", "🔍"):
-            relevance = result.topic_relevance
-            if relevance.status:
-                st.markdown(f"**Status:** {relevance.status}")
-            if relevance.justification:
-                st.markdown(f"**Justification:** {relevance.justification}")
-            if not relevance.status and not relevance.justification:
-                st.markdown(f"*{NOT_SPECIFIED}*")
+    if topic and topic.strip():
+        _render_topic_relevance(result)

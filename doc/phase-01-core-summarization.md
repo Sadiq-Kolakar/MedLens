@@ -1,6 +1,6 @@
 # Phase 1 — Core Summarization (End-to-End)
 
-**Status:** Not started  
+**Status:** Complete  
 **Estimated time:** 25 minutes  
 **Dependencies:** [Phase 0](./phase-00-project-setup.md)  
 **Priority:** Must have (highest)

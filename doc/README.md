@@ -17,7 +17,7 @@ Use these docs when building: point the agent at a specific phase file (e.g. *"B
 | Phase | File | Status | Description |
 |-------|------|--------|-------------|
 | 0 | [phase-00-project-setup.md](./phase-00-project-setup.md) | Complete | Repo structure, dependencies, env config |
-| 1 | [phase-01-core-summarization.md](./phase-01-core-summarization.md) | Not started | End-to-end abstract → LLM → summary flow |
+| 1 | [phase-01-core-summarization.md](./phase-01-core-summarization.md) | Complete | End-to-end abstract → LLM → summary flow |
 | 2 | [phase-02-prompt-and-schema.md](./phase-02-prompt-and-schema.md) | Not started | Domain prompts, JSON schema, Pydantic models |
 | 3 | [phase-03-input-ui.md](./phase-03-input-ui.md) | Not started | Input form, length selector, generate button |
 | 4 | [phase-04-results-ui.md](./phase-04-results-ui.md) | Not started | Card-based structured output display |

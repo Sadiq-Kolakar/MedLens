@@ -2,32 +2,29 @@ import streamlit as st
 
 from config import get_openai_api_key
 from llm import generate_summary
+from ui.components import inject_custom_css, render_header, render_section_divider
+from ui.input_form import render_input_form
 
-st.set_page_config(page_title="MedLens", layout="wide")
-st.title("MedLens")
-st.caption("Medical Literature Summarization")
+st.set_page_config(page_title="MedLens", page_icon="🔬", layout="wide")
+inject_custom_css()
+render_header()
 
-abstract = st.text_area(
-    "Enter Medical Abstract",
-    placeholder="Paste a medical research abstract here...",
-    height=200,
-)
-summary_length = st.radio(
-    "Summary Length",
-    ["Small", "Medium", "Detailed"],
-    horizontal=True,
-)
+form_data = render_input_form()
 
-if st.button("Generate Summary"):
-    if not abstract.strip():
+if form_data.generate_clicked:
+    if not form_data.abstract.strip():
         st.error("Please enter a medical abstract.")
     elif not get_openai_api_key():
         st.error("OpenAI API key is not configured.")
     else:
         with st.spinner("Generating summary..."):
             try:
-                result = generate_summary(abstract.strip(), summary_length)
-                st.markdown("### Summary")
+                result = generate_summary(
+                    form_data.abstract.strip(),
+                    form_data.summary_length,
+                    form_data.topic,
+                )
+                render_section_divider("Results")
                 st.json(result.model_dump())
             except Exception as e:
                 message = getattr(e, "user_message", None) or (

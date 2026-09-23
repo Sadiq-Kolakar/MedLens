@@ -1,6 +1,6 @@
 # Phase 3 — Input UI
 
-**Status:** Not started  
+**Status:** Complete  
 **Estimated time:** 15 minutes  
 **Dependencies:** [Phase 2](./phase-02-prompt-and-schema.md)  
 **Priority:** Must have

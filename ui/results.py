@@ -50,6 +50,7 @@ def render_results(
     result: SummaryResult,
     length: str,
     topic: str | None = None,
+    source_label: str | None = None,
 ) -> None:
     st.markdown('<div class="medlens-results-section">', unsafe_allow_html=True)
 
@@ -57,6 +58,8 @@ def render_results(
         if result.title and result.title != NOT_SPECIFIED:
             st.markdown(f"**{result.title}**")
         st.markdown(f"**Summary length:** {length}")
+        if source_label:
+            st.markdown(f"**Sources:** {source_label}")
         if topic:
             st.markdown(f"**Topic / keyword:** {topic}")
 

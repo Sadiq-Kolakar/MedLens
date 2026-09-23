@@ -38,3 +38,4 @@ class HistoryEntry:
     summary_length: str
     topic: str | None
     result: SummaryResult
+    source_label: str = ""

@@ -24,6 +24,7 @@ def add_to_history(
     summary_length: str,
     topic: str | None,
     result: SummaryResult,
+    source_label: str = "",
 ) -> HistoryEntry:
     entry = HistoryEntry(
         timestamp=datetime.now(),
@@ -31,6 +32,7 @@ def add_to_history(
         summary_length=summary_length,
         topic=topic,
         result=result,
+        source_label=source_label,
     )
     st.session_state.history.insert(0, entry)
     st.session_state.history = st.session_state.history[:MAX_HISTORY_ENTRIES]

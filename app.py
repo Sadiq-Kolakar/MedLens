@@ -1,8 +1,10 @@
 import streamlit as st
 
-from config import MISSING_API_KEY_MESSAGE, get_openai_api_key, validate_abstract
+from config import MISSING_API_KEY_MESSAGE, get_openai_api_key, validate_input
+from input_builder import build_source_label, count_sources
 from llm import generate_summary
 from models import HistoryEntry, SummaryGenerationError
+from pdf_extractor import extract_text_from_pdfs
 from ui.components import (
     inject_custom_css,
     render_footer,
@@ -26,27 +28,42 @@ form_data = render_input_form()
 entry_to_display: HistoryEntry | None = None
 
 if form_data.generate_clicked:
-    validation_error = validate_abstract(form_data.abstract)
-    if validation_error:
-        show_error(validation_error)
-    elif not get_openai_api_key():
+    if not get_openai_api_key():
         show_error(MISSING_API_KEY_MESSAGE)
     else:
-        with st.spinner("Generating summary..."):
-            try:
-                result = generate_summary(
-                    form_data.abstract.strip(),
-                    form_data.summary_length,
-                    form_data.topic,
+        try:
+            pdf_documents, skipped_pdfs = extract_text_from_pdfs(form_data.uploaded_pdfs)
+            for filename in skipped_pdfs:
+                st.warning(f"No extractable text in '{filename}'. Skipping this file.")
+            validation_error, combined_text = validate_input(
+                form_data.abstract, pdf_documents
+            )
+            if validation_error:
+                show_error(validation_error)
+            else:
+                source_count = count_sources(form_data.abstract, pdf_documents)
+                source_label = build_source_label(form_data.abstract, pdf_documents)
+                spinner_label = (
+                    "Extracting PDF text and generating summary..."
+                    if pdf_documents
+                    else "Generating summary..."
                 )
-                entry_to_display = add_to_history(
-                    form_data.abstract.strip(),
-                    form_data.summary_length,
-                    form_data.topic,
-                    result,
-                )
-            except SummaryGenerationError as e:
-                show_error(e.user_message)
+                with st.spinner(spinner_label):
+                    result = generate_summary(
+                        combined_text,
+                        form_data.summary_length,
+                        form_data.topic,
+                        source_count=source_count,
+                    )
+                    entry_to_display = add_to_history(
+                        combined_text,
+                        form_data.summary_length,
+                        form_data.topic,
+                        result,
+                        source_label=source_label,
+                    )
+        except SummaryGenerationError as e:
+            show_error(e.user_message)
 
 if entry_to_display is None:
     entry_to_display = get_selected_entry()
@@ -57,6 +74,7 @@ if entry_to_display is not None:
         entry_to_display.result,
         entry_to_display.summary_length,
         entry_to_display.topic,
+        source_label=entry_to_display.source_label,
     )
 
 render_footer()

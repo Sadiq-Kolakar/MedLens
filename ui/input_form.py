@@ -27,6 +27,7 @@ def render_input_form() -> InputFormData:
     summary_length = st.radio(
         "Summary Length",
         ["Small", "Medium", "Detailed"],
+        index=1,
         horizontal=True,
         help="Small: concise · Medium: balanced · Detailed: comprehensive",
     )

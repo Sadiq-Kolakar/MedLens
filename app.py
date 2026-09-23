@@ -5,6 +5,7 @@ from llm import generate_summary
 from models import HistoryEntry, SummaryGenerationError
 from ui.components import (
     inject_custom_css,
+    render_footer,
     render_header,
     render_section_divider,
     show_error,
@@ -57,3 +58,5 @@ if entry_to_display is not None:
         entry_to_display.summary_length,
         entry_to_display.topic,
     )
+
+render_footer()

@@ -8,19 +8,30 @@ def inject_custom_css() -> None:
     st.markdown(
         """
         <style>
-            .medlens-header {
-                margin-bottom: 0.25rem;
-            }
             .medlens-subtitle {
                 color: #5f6368;
                 font-size: 1.05rem;
-                margin-bottom: 1.5rem;
+                margin-top: -0.5rem;
+                margin-bottom: 1.75rem;
             }
             .medlens-input-section {
-                padding: 1.25rem 0;
+                padding: 0.5rem 0 1.5rem;
+            }
+            .medlens-results-section {
+                padding-top: 0.5rem;
             }
             div[data-testid="stRadio"] > label {
                 font-weight: 500;
+            }
+            div[data-testid="stVerticalBlockBorderWrapper"] {
+                margin-bottom: 0.85rem;
+            }
+            .medlens-footer {
+                color: #6b7280;
+                font-size: 0.85rem;
+                margin-top: 2.5rem;
+                padding-top: 1rem;
+                border-top: 1px solid #e5e7eb;
             }
         </style>
         """,
@@ -44,6 +55,18 @@ def render_section_divider(title: str | None = None) -> None:
 
 def show_error(message: str) -> None:
     st.error(message)
+
+
+def render_footer() -> None:
+    st.markdown(
+        """
+        <p class="medlens-footer">
+        MedLens is a research-assistance tool for medical literature summarization.
+        It does not provide medical diagnoses, treatment recommendations, or clinical advice.
+        </p>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 @contextmanager

@@ -24,7 +24,7 @@ Use these docs when building: point the agent at a specific phase file (e.g. *"B
 | 5 | [phase-05-topic-relevance.md](./phase-05-topic-relevance.md) | Complete | Optional topic/keyword relevance check |
 | 6 | [phase-06-error-handling.md](./phase-06-error-handling.md) | Complete | Validation, API errors, malformed responses |
 | 7 | [phase-07-session-history.md](./phase-07-session-history.md) | Complete | Optional Streamlit session state history |
-| 8 | [phase-08-demo-polish.md](./phase-08-demo-polish.md) | Not started | Final polish, demo readiness, smoke tests |
+| 8 | [phase-08-demo-polish.md](./phase-08-demo-polish.md) | Complete | Final polish, demo readiness, smoke tests |
 | — | [phase-09-future-enhancements.md](./phase-09-future-enhancements.md) | Reference | Post-MVP features (do not build for hackathon) |
 
 ## How to Build

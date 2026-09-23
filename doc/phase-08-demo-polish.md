@@ -1,6 +1,6 @@
 # Phase 8 — Demo Polish & Smoke Test
 
-**Status:** Not started  
+**Status:** Complete  
 **Estimated time:** 10 minutes  
 **Dependencies:** [Phase 6](./phase-06-error-handling.md) (Phase 7 optional)  
 **Priority:** Must have

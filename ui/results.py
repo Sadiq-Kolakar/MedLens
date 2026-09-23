@@ -51,6 +51,8 @@ def render_results(
     length: str,
     topic: str | None = None,
 ) -> None:
+    st.markdown('<div class="medlens-results-section">', unsafe_allow_html=True)
+
     with render_card("AI Medical Literature Summary", "📋"):
         if result.title and result.title != NOT_SPECIFIED:
             st.markdown(f"**{result.title}**")
@@ -86,3 +88,5 @@ def render_results(
 
     if topic and topic.strip():
         _render_topic_relevance(result)
+
+    st.markdown("</div>", unsafe_allow_html=True)

@@ -1,6 +1,10 @@
+from dataclasses import dataclass
+from datetime import datetime
+
 from pydantic import BaseModel, Field
 
 NOT_SPECIFIED = "Not specified in the abstract."
+MAX_HISTORY_ENTRIES = 10
 
 
 class TopicRelevance(BaseModel):
@@ -25,3 +29,12 @@ class SummaryGenerationError(Exception):
     def __init__(self, user_message: str):
         self.user_message = user_message
         super().__init__(user_message)
+
+
+@dataclass
+class HistoryEntry:
+    timestamp: datetime
+    abstract_preview: str
+    summary_length: str
+    topic: str | None
+    result: SummaryResult

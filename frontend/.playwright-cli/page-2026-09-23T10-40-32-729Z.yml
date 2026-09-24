@@ -1,0 +1,60 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - complementary [ref=e4]:
+        - generic [ref=e6]:
+          - paragraph [ref=e7]: MedLens
+          - heading "Recent summaries" [level=2] [ref=e8]
+        - separator [ref=e13]
+        - generic [ref=e14]: No summaries yet. Generate one to start a session trail.
+      - generic [ref=e16]:
+        - generic [ref=e18]:
+          - generic [ref=e19]:
+            - generic [ref=e20]: Medical literature summarization
+            - heading "MedLens" [level=1] [ref=e21]
+            - paragraph [ref=e22]: Turn research abstracts into structured, topic-aware summary cards.
+          - alert [ref=e23]:
+            - generic [ref=e27]: Research assistance only
+            - generic [ref=e28]: No diagnoses, treatment recommendations, or clinical advice.
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]:
+              - generic [ref=e32]: Enter Medical Abstract
+              - button "Load Sample" [ref=e33]
+            - textbox "Enter Medical Abstract" [ref=e34]:
+              - /placeholder: Paste a medical research abstract here. The summary will be generated from this text only.
+              - text: "Background: Type 2 diabetes mellitus is a major public health concern. Metformin is widely used as first-line therapy, but long-term cardiovascular outcomes require further evaluation in diverse populations. Methods: We conducted a multicenter, randomized, double-blind, placebo-controlled trial enrolling 1,842 adults aged 45-70 years with type 2 diabetes and at least one cardiovascular risk factor. Participants were assigned to metformin extended-release (2000 mg daily) or placebo for 36 months. The primary endpoint was a composite of nonfatal myocardial infarction, stroke, or cardiovascular death. Results: The primary endpoint occurred in 8.4% of the metformin group versus 11.2% of the placebo group (hazard ratio 0.74; 95% CI 0.58-0.94; p=0.01). HbA1c decreased by 0.9% in the metformin group compared with 0.2% in the placebo group. Gastrointestinal adverse events were more common with metformin (18.3% vs 7.1%). Conclusions: In adults with type 2 diabetes and cardiovascular risk factors, metformin reduced major adverse cardiovascular events over 36 months compared with placebo. Limitations include a relatively short follow-up period and underrepresentation of adults over age 70."
+            - paragraph [ref=e35]: 1,200 / 15,000 characters
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - generic [ref=e38]:
+                - generic [ref=e39]: Summary Length
+                - generic [ref=e40]: Choose the amount of detail in the generated cards.
+              - radiogroup [ref=e42]:
+                - generic [ref=e43] [cursor=pointer]:
+                  - radio "Small" [ref=e65]
+                  - radio [aria-hidden] [ref=e45]
+                  - generic [ref=e46]: Small
+                - generic [ref=e47] [cursor=pointer]:
+                  - radio "Medium" [checked] [ref=e66]
+                  - radio [checked] [aria-hidden] [ref=e51]
+                  - generic [ref=e52]: Medium
+                - generic [ref=e53] [cursor=pointer]:
+                  - radio "Detailed" [ref=e67]
+                  - radio [aria-hidden] [ref=e55]
+                  - generic [ref=e56]: Detailed
+            - generic [ref=e57]:
+              - generic [ref=e58]:
+                - generic [ref=e59]: Topic Check
+                - generic [ref=e60]: Optional keyword relevance check.
+              - generic [ref=e61]:
+                - generic [ref=e62]: Topic / Keyword
+                - textbox "Topic / Keyword" [ref=e63]:
+                  - /placeholder: Diabetes, cardiovascular risk
+                  - text: Diabetes
+            - alert [ref=e83]:
+              - generic [ref=e86]: Could not generate
+              - generic [ref=e87]: OpenAI API key was rejected. Check the key in your .env file.
+            - button "Generate Summary" [ref=e64]
+  - button "Open Next.js Dev Tools" [ref=e73] [cursor=pointer]
+  - alert [ref=e77]

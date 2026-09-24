@@ -1,0 +1,52 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - complementary [ref=e4]:
+      - generic [ref=e6]:
+        - paragraph [ref=e7]: MedLens
+        - heading "Recent summaries" [level=2] [ref=e8]
+      - separator [ref=e13]
+      - generic [ref=e14]: No summaries yet. Generate one to start a session trail.
+    - generic [ref=e16]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]: Medical literature summarization
+          - heading "MedLens" [level=1] [ref=e21]
+          - paragraph [ref=e22]: Turn research abstracts into structured, topic-aware summary cards.
+        - alert [ref=e23]:
+          - generic [ref=e27]: Research assistance only
+          - generic [ref=e28]: No diagnoses, treatment recommendations, or clinical advice.
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]:
+            - generic [ref=e32]: Enter Medical Abstract
+            - button "Load Sample" [ref=e33]
+          - textbox "Enter Medical Abstract" [ref=e34]:
+            - /placeholder: Paste a medical research abstract here. The summary will be generated from this text only.
+          - paragraph [ref=e35]: 0 / 15,000 characters
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - generic [ref=e39]: Summary Length
+              - generic [ref=e40]: Choose the amount of detail in the generated cards.
+            - radiogroup [ref=e42]:
+              - generic [ref=e43] [cursor=pointer]:
+                - radio [ref=e44]
+                - radio [aria-hidden] [ref=e45]
+                - generic [ref=e46]: Small
+              - generic [ref=e47] [cursor=pointer]:
+                - radio [checked] [ref=e48]
+                - radio [checked] [aria-hidden] [ref=e51]
+                - generic [ref=e52]: Medium
+              - generic [ref=e53] [cursor=pointer]:
+                - radio [ref=e54]
+                - radio [aria-hidden] [ref=e55]
+                - generic [ref=e56]: Detailed
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - generic [ref=e59]: Topic Check
+              - generic [ref=e60]: Optional keyword relevance check.
+            - generic [ref=e61]:
+              - generic [ref=e62]: Topic / Keyword
+              - textbox "Topic / Keyword" [ref=e63]:
+                - /placeholder: Diabetes, cardiovascular risk
+          - button "Generate Summary" [ref=e64]
